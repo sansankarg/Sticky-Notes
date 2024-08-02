@@ -78,8 +78,10 @@ function dragNdDrop(element, id, co){
      
     element.addEventListener( events[isTouch()].click, (e) => {
         isMouseDown[co] = true;
-        offX = element.offsetLeft - e.clientX;
-        offY = element.offsetTop - e.clientY;
+        let X = isTouch() == "touch" ? e.touches[0].clientX : e.clientX;
+        let Y = isTouch() == "touch" ? e.touches[0].clientY : e.clientY;
+        offX = element.offsetLeft - X;
+        offY = element.offsetTop - Y;
         element.className = "dragable1";
         console.log(offX);
     });
@@ -89,8 +91,10 @@ function dragNdDrop(element, id, co){
             return;
         }
         e.preventDefault();
-        mouX = e.clientX + offX;
-        mouY = e.clientY + offY;
+        let X = isTouch() == "touch" ? e.touches[0].clientX : e.clientX;
+        let Y = isTouch() == "touch" ? e.touches[0].clientY : e.clientY;
+        mouX = X + offX;
+        mouY = Y + offY;
         current = co;
         // document.getElementById('divo').innerHTML = current;
         element.style.left = mouX +'px';
