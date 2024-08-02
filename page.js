@@ -112,6 +112,7 @@ function dragNdDrop(element, id, co){
         console.log(offX);
     };
     const drag = (e) => {
+        e.preventDefault();
         if(!isMouseDown[co]){
             return;
         }
@@ -137,6 +138,7 @@ function dragNdDrop(element, id, co){
         }
     };
     const dragend = (e) => {
+        e.preventDefault();
         isMouseDown[co] = false;
         element.className = "dragable";
         document.getElementById('deleteMessage').innerHTML = "";
