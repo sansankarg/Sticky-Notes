@@ -10,7 +10,7 @@ let current = 0;
 let toDelete = 0;
 let isMouseDown = [];
 let isDelete = [];
-
+let height = window.screen.height - (window.screen.height*0.30);
 
 function getCursorCoordinates(event) {
     return {
@@ -122,7 +122,7 @@ function dragNdDrop(element, id, co){
         element.style.top = mouY +'px';
         element.className = "dragable1";
         document.getElementById('deleteMessage').innerHTML = "Drag down to delete";
-        if(e.clientY>700){
+        if(e.clientY>height){
             document.getElementById('delete').className = "delete1";
             isDelete = true;
             element.className = "shake";
