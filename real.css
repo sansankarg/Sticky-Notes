@@ -7,9 +7,9 @@
     width: 150px;
     border-radius: 15px;
     background-image: url("1722421859083[1].png");
-    background-size: cover; /* Cover the entire div while preserving aspect ratio */
-    background-position: center; /* Center the image within the div */
-    background-repeat: no-repeat; /* Prevent repeating the image */
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
     cursor: move;
     color: black;
     font-size: larger;
