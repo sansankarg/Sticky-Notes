@@ -11,7 +11,7 @@ let toDelete = 0;
 let isMouseDown = [];
 let isDelete = [];
 let actualheight = window.innerHeight
-let height = window.innerHeight - (window.innerHeight*0.30);
+let height = window.innerHeight - (window.innerHeight*0.15);
 function getCursorCoordinates(event) {
     return {
       x: event.clientX,
