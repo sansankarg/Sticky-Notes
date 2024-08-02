@@ -52,16 +52,64 @@ function createElement(){
 }
 // document.getElementById('divo').innerHTML = current;
 
+// function dragNdDrop(element, id, co){
+//     element.addEventListener( 'mousedown', (e) => {
+//         isMouseDown[co] = true;
+//         offX = element.offsetLeft - e.clientX;
+//         offY = element.offsetTop - e.clientY;
+//         element.className = "dragable1";
+//         console.log(offX);
+//     });
+    
+//     element.addEventListener( 'mousemove', (e) => {
+//         if(!isMouseDown[co]){
+//             return;
+//         }
+//         e.preventDefault();
+//         mouX = e.clientX + offX;
+//         mouY = e.clientY + offY;
+//         current = co;
+//         // document.getElementById('divo').innerHTML = current;
+//         element.style.left = mouX +'px';
+//         element.style.top = mouY +'px';
+//         element.className = "dragable1";
+//         document.getElementById('deleteMessage').innerHTML = "Drag down to delete";
+//         if(e.clientY>700){
+//             document.getElementById('delete').className = "delete1";
+//             isDelete = true;
+//             element.className = "shake";
+//             // document.getElementById('divo1').innerHTML = isDelete;
+//         }else{
+//             // element.style.backgroundColor = "rgba(255, 255, 255, 0)";
+//             document.getElementById('delete').className = "delete2";
+//             isDelete = false;
+//             // document.getElementById('divo1').innerHTML = isDelete;
+
+//         }
+//     });
+    
+//     element.addEventListener('mouseup', (e) => {
+//         isMouseDown[co] = false;
+//         element.className = "dragable";
+//         document.getElementById('deleteMessage').innerHTML = "";
+//         if (isDelete) {
+//             element.remove();
+//             current =  -1;
+//             document.getElementById('delete').className = "delete2";
+//             // document.getElementById('divo').innerHTML = current;
+//         }
+        
+//     });   
+// }
 function dragNdDrop(element, id, co){
-    element.addEventListener( 'mousedown', (e) => {
+    const dragstart = (e) => {
         isMouseDown[co] = true;
         offX = element.offsetLeft - e.clientX;
         offY = element.offsetTop - e.clientY;
         element.className = "dragable1";
         console.log(offX);
-    });
-    
-    element.addEventListener( 'mousemove', (e) => {
+    };
+    const drag = (e) => {
         if(!isMouseDown[co]){
             return;
         }
@@ -86,9 +134,8 @@ function dragNdDrop(element, id, co){
             // document.getElementById('divo1').innerHTML = isDelete;
 
         }
-    });
-    
-    element.addEventListener('mouseup', (e) => {
+    };
+    const dragend = (e) => {
         isMouseDown[co] = false;
         element.className = "dragable";
         document.getElementById('deleteMessage').innerHTML = "";
@@ -99,9 +146,14 @@ function dragNdDrop(element, id, co){
             // document.getElementById('divo').innerHTML = current;
         }
         
-    });
+    };   
 
-    
+    element.addEventListener('mousedown',dragstart)
+    element.addEventListener('touchstart',dragstart)
+    element.addEventListener('mousemove',drag)
+    element.addEventListener('touchmove',drag)
+    element.addEventListener('mouseup',dragend)
+    element.addEventListener('touchend',dragend)
 }
 document.getElementById('btn').addEventListener('click', createElement);
 
