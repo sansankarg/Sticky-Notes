@@ -12,6 +12,7 @@ let isMouseDown = [];
 let isDelete = [];
 let actualheight = window.innerHeight
 let height = window.innerHeight - (window.innerHeight*0.15);
+let informCount = 0;
 // function getCursorCoordinates(event) {
 //     return {
 //       x: event.clientX,
@@ -101,7 +102,10 @@ function dragNdDrop(element, id, co){
         element.style.left = mouX +'px';
         element.style.top = mouY +'px';
         element.className = "dragable1";
-        document.getElementById('guide').innerHTML = "Drag down to delete";
+        if(informCount<1000){
+            document.getElementById('guide').innerHTML = "Drag and drop at bottom of the screen to delete";
+            informCount++;
+        }
         if(Y>height){
             // document.getElementById('guide').innerHTML = isDelete[co] + "," +Y+",,"+height+"and"+actualheight;
             document.getElementById('delete').className = "delete1";
