@@ -10,8 +10,8 @@ let current = 0;
 let toDelete = 0;
 let isMouseDown = [];
 let isDelete = [];
-let actualheight = window.screen.height;
-let height = window.screen.height - (window.screen.height*0.30);
+let actualheight = window.innerHeight
+let height = window.innerHeight - (window.innerHeight*0.30);
 function getCursorCoordinates(event) {
     return {
       x: event.clientX,
@@ -103,13 +103,13 @@ function dragNdDrop(element, id, co){
         element.className = "dragable1";
         document.getElementById('deleteMessage').innerHTML = "Drag down to delete";
         if(Y>height){
-            document.getElementById('guide').innerHTML = isDelete[co] + "," +Y+",,"+height+"''"+actualheight;
+            document.getElementById('guide').innerHTML = isDelete[co] + "," +Y+",,"+height+"and"+actualheight;
             document.getElementById('delete').className = "delete1";
             isDelete[co] = true;
             element.className = "shake";
             // document.getElementById('divo1').innerHTML = isDelete;
         }else{
-            document.getElementById('guide').innerHTML = isDelete[co] + "," +Y+",,"+height+"''"+actualheight;
+            document.getElementById('guide').innerHTML = isDelete[co] + "," +Y+",,"+height+"and"+actualheight;
             // element.style.backgroundColor = "rgba(255, 255, 255, 0)";
             document.getElementById('delete').className = "delete2";
             isDelete[co] = false;
