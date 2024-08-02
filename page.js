@@ -11,7 +11,6 @@ let toDelete = 0;
 let isMouseDown = [];
 let isDelete = [];
 let height = window.screen.height - (window.screen.height*0.30);
-
 function getCursorCoordinates(event) {
     return {
       x: event.clientX,
@@ -84,6 +83,7 @@ function dragNdDrop(element, id, co){
         offY = element.offsetTop - Y;
         element.className = "dragable1";
         console.log(offX);
+        document.getElementById('guide').innerHTML = isDelete[co];
     });
     
     element.addEventListener( events[isTouch()].drag, (e) => {
@@ -101,25 +101,28 @@ function dragNdDrop(element, id, co){
         element.style.top = mouY +'px';
         element.className = "dragable1";
         document.getElementById('deleteMessage').innerHTML = "Drag down to delete";
-        if(e.clientY>700){
+        if(Y>height){
+            document.getElementById('guide').innerHTML = isDelete[co] + "," +Y+",,"+height;
             document.getElementById('delete').className = "delete1";
-            isDelete = true;
+            isDelete[co] = true;
             element.className = "shake";
             // document.getElementById('divo1').innerHTML = isDelete;
         }else{
+            document.getElementById('guide').innerHTML = isDelete[co] + "," +Y+",,"+height;
             // element.style.backgroundColor = "rgba(255, 255, 255, 0)";
             document.getElementById('delete').className = "delete2";
-            isDelete = false;
+            isDelete[co] = false;
             // document.getElementById('divo1').innerHTML = isDelete;
 
         }
     });
     
     element.addEventListener(events[isTouch()].end, (e) => {
+        document.getElementById('guide').innerHTML = isDelete[co];
         isMouseDown[co] = false;
         element.className = "dragable";
         document.getElementById('deleteMessage').innerHTML = "";
-        if (isDelete) {
+        if (isDelete[co]) {
             element.remove();
             current =  -1;
             document.getElementById('delete').className = "delete2";
