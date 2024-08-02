@@ -28,6 +28,7 @@ function createElement(){
     div.placeholder = "Type here..."
      const scrollX = window.scrollX;
      const scrollY = window.scrollY;
+     document.getElementById('guide').innerHTML = "";
     //  function set(e){
     //     var xy = getCursorCoordinates(e);
     //     div.style.left = xy.x + scrollX + 'px';
@@ -103,6 +104,7 @@ function createElement(){
 // }
 function dragNdDrop(element, id, co){
     const dragstart = (e) => {
+        e.preventDefault();
         isMouseDown[co] = true;
         offX = element.offsetLeft - e.clientX;
         offY = element.offsetTop - e.clientY;
@@ -121,15 +123,14 @@ function dragNdDrop(element, id, co){
         element.style.left = mouX +'px';
         element.style.top = mouY +'px';
         element.className = "dragable1";
-        document.getElementById('deleteMessage').innerHTML = "Drag down to delete";
+        document.getElementById('guide').innerHTML = "Drag down to delete.";
+
         if(e.clientY>height){
-            document.getElementById('delete').className = "delete1";
             isDelete = true;
             element.className = "shake";
             // document.getElementById('divo1').innerHTML = isDelete;
         }else{
             // element.style.backgroundColor = "rgba(255, 255, 255, 0)";
-            document.getElementById('delete').className = "delete2";
             isDelete = false;
             // document.getElementById('divo1').innerHTML = isDelete;
 
@@ -139,10 +140,11 @@ function dragNdDrop(element, id, co){
         isMouseDown[co] = false;
         element.className = "dragable";
         document.getElementById('deleteMessage').innerHTML = "";
+        document.getElementById('guide').innerHTML = "";
+
         if (isDelete) {
             element.remove();
             current =  -1;
-            document.getElementById('delete').className = "delete2";
             // document.getElementById('divo').innerHTML = current;
         }
         
