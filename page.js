@@ -107,7 +107,7 @@ const isTouch = () => {
       document.createEvent("TouchEvent")
       return true;
     } catch (error) {
-      return false
+      return false;
     }
  };
 
