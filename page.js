@@ -53,124 +53,139 @@ function createElement(){
 }
 // document.getElementById('divo').innerHTML = current;
 
-// function dragNdDrop(element, id, co){
-//     element.addEventListener( 'mousedown', (e) => {
-//         isMouseDown[co] = true;
-//         offX = element.offsetLeft - e.clientX;
-//         offY = element.offsetTop - e.clientY;
-//         element.className = "dragable1";
-//         console.log(offX);
-//     });
-    
-//     element.addEventListener( 'mousemove', (e) => {
-//         if(!isMouseDown[co]){
-//             return;
-//         }
-//         e.preventDefault();
-//         mouX = e.clientX + offX;
-//         mouY = e.clientY + offY;
-//         current = co;
-//         // document.getElementById('divo').innerHTML = current;
-//         element.style.left = mouX +'px';
-//         element.style.top = mouY +'px';
-//         element.className = "dragable1";
-//         document.getElementById('deleteMessage').innerHTML = "Drag down to delete";
-//         if(e.clientY>700){
-//             document.getElementById('delete').className = "delete1";
-//             isDelete = true;
-//             element.className = "shake";
-//             // document.getElementById('divo1').innerHTML = isDelete;
-//         }else{
-//             // element.style.backgroundColor = "rgba(255, 255, 255, 0)";
-//             document.getElementById('delete').className = "delete2";
-//             isDelete = false;
-//             // document.getElementById('divo1').innerHTML = isDelete;
-
-//         }
-//     });
-    
-//     element.addEventListener('mouseup', (e) => {
-//         isMouseDown[co] = false;
-//         element.className = "dragable";
-//         document.getElementById('deleteMessage').innerHTML = "";
-//         if (isDelete) {
-//             element.remove();
-//             current =  -1;
-//             document.getElementById('delete').className = "delete2";
-//             // document.getElementById('divo').innerHTML = current;
-//         }
-        
-//     });   
-// }
-const isTouch = () => {
-    try {
-      document.createEvent("TouchEvent")
-      return true;
-    } catch (error) {
-      return false;
-    }
- };
-
 function dragNdDrop(element, id, co){
-    const dragstart = (e) => {
-        e.preventDefault();
+    const events = {
+        mouse: {
+            click: "mousedown",
+            drag: "mousemove",
+            end: "mouseup"
+        },
+        touch: {
+            click: "touchstart",
+            drag: "touchmove",
+            end: "touchend"
+        },
+    }
+    const isTouch = () => {
+        try {
+          document.createEvent("TouchEvent")
+          return "touch";
+        } catch (error) {
+          return "mouse";
+        }
+    };
+    
+     
+    element.addEventListener( events[isTouch()].click, (e) => {
         isMouseDown[co] = true;
-        let X = isTouch() == true ? e.touches[0].clientX : e.clientX;
-        let Y = isTouch() == true ? e.touches[0].clientY : e.clientY;
-        offX = element.offsetLeft - X;
-        offY = element.offsetTop - Y;
+        offX = element.offsetLeft - e.clientX;
+        offY = element.offsetTop - e.clientY;
         element.className = "dragable1";
         console.log(offX);
-    };
-    const drag = (e) => {
-        e.preventDefault();
+    });
+    
+    element.addEventListener( events[isTouch()].drag, (e) => {
         if(!isMouseDown[co]){
             return;
         }
         e.preventDefault();
-        let X = isTouch() == true ? e.touches[0].clientX : e.clientX;
-        let Y = isTouch() == true ? e.touches[0].clientY : e.clientY;
-        mouX = X + offX;
-        mouY = Y + offY;
+        mouX = e.clientX + offX;
+        mouY = e.clientY + offY;
         current = co;
         // document.getElementById('divo').innerHTML = current;
         element.style.left = mouX +'px';
         element.style.top = mouY +'px';
         element.className = "dragable1";
-        document.getElementById('guide').innerHTML = "Drag down to delete.";
-
-        if(e.clientY>height){
+        document.getElementById('deleteMessage').innerHTML = "Drag down to delete";
+        if(e.clientY>700){
+            document.getElementById('delete').className = "delete1";
             isDelete = true;
             element.className = "shake";
             // document.getElementById('divo1').innerHTML = isDelete;
         }else{
             // element.style.backgroundColor = "rgba(255, 255, 255, 0)";
+            document.getElementById('delete').className = "delete2";
             isDelete = false;
             // document.getElementById('divo1').innerHTML = isDelete;
 
         }
-    };
-    const dragend = (e) => {
-        e.preventDefault();
+    });
+    
+    element.addEventListener(events[isTouch()].end, (e) => {
         isMouseDown[co] = false;
         element.className = "dragable";
         document.getElementById('deleteMessage').innerHTML = "";
-        document.getElementById('guide').innerHTML = "";
-
         if (isDelete) {
             element.remove();
             current =  -1;
+            document.getElementById('delete').className = "delete2";
             // document.getElementById('divo').innerHTML = current;
         }
         
-    };   
-    element.addEventListener('mousedown',dragstart)
-    element.addEventListener('touchstart',dragstart)
-    element.addEventListener('mousemove',drag)
-    element.addEventListener('touchmove',drag)
-    element.addEventListener('mouseup',dragend)
-    element.addEventListener('touchend',dragend)
+    });   
+    
 }
+
+// function dragNdDrop(element, id, co){
+//     const dragstart = (e) => {
+//         e.preventDefault();
+//         isMouseDown[co] = true;
+//         let X = isTouch() == true ? e.touches[0].clientX : e.clientX;
+//         let Y = isTouch() == true ? e.touches[0].clientY : e.clientY;
+//         offX = element.offsetLeft - X;
+//         offY = element.offsetTop - Y;
+//         element.className = "dragable1";
+//         console.log(offX);
+//     };
+//     const drag = (e) => {
+//         e.preventDefault();
+//         if(!isMouseDown[co]){
+//             return;
+//         }
+//         e.preventDefault();
+//         let X = isTouch() == true ? e.touches[0].clientX : e.clientX;
+//         let Y = isTouch() == true ? e.touches[0].clientY : e.clientY;
+//         mouX = X + offX;
+//         mouY = Y + offY;
+//         current = co;
+//         // document.getElementById('divo').innerHTML = current;
+//         element.style.left = mouX +'px';
+//         element.style.top = mouY +'px';
+//         element.className = "dragable1";
+//         document.getElementById('guide').innerHTML = "Drag down to delete.";
+
+//         if(e.clientY>height){
+//             isDelete = true;
+//             element.className = "shake";
+//             // document.getElementById('divo1').innerHTML = isDelete;
+//         }else{
+//             // element.style.backgroundColor = "rgba(255, 255, 255, 0)";
+//             isDelete = false;
+//             // document.getElementById('divo1').innerHTML = isDelete;
+
+//         }
+//     };
+//     const dragend = (e) => {
+//         e.preventDefault();
+//         isMouseDown[co] = false;
+//         element.className = "dragable";
+//         document.getElementById('deleteMessage').innerHTML = "";
+//         document.getElementById('guide').innerHTML = "";
+
+//         if (isDelete) {
+//             element.remove();
+//             current =  -1;
+//             // document.getElementById('divo').innerHTML = current;
+//         }
+        
+//     };   
+//     element.addEventListener('mousedown',dragstart)
+//     element.addEventListener('touchstart',dragstart)
+//     element.addEventListener('mousemove',drag)
+//     element.addEventListener('touchmove',drag)
+//     element.addEventListener('mouseup',dragend)
+//     element.addEventListener('touchend',dragend)
+// }
 document.getElementById('btn').addEventListener('click', createElement);
 
 function changeSheet(sheet) {
