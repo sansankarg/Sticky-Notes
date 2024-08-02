@@ -28,18 +28,18 @@ function createElement(){
     div.placeholder = "Type here..."
      const scrollX = window.scrollX;
      const scrollY = window.scrollY;
-     function set(e){
-        var xy = getCursorCoordinates(e);
-        div.style.left = xy.x + scrollX + 'px';
-        div.style.top = (xy.y) + scrollY + 'px';
-        div.className = "dragable1";
-     }
-     function remove(){
-         document.removeEventListener('mousemove', set);
-         div.className = "dragable";
-     }
-    document.addEventListener('mousemove', set);
-    document.addEventListener('mouseup', remove)
+    //  function set(e){
+    //     var xy = getCursorCoordinates(e);
+    //     div.style.left = xy.x + scrollX + 'px';
+    //     div.style.top = (xy.y) + scrollY + 'px';
+    //     div.className = "dragable1";
+    //  }
+    //  function remove(){
+    //      document.removeEventListener('mousemove', set);
+    //      div.className = "dragable";
+    //  }
+    // document.addEventListener('mousemove', set);
+    // document.addEventListener('mouseup', remove)
     div.className = "dragable1";
     document.body.appendChild(div);
     divs.push(div);
@@ -147,7 +147,6 @@ function dragNdDrop(element, id, co){
         }
         
     };   
-
     element.addEventListener('mousedown',dragstart)
     element.addEventListener('touchstart',dragstart)
     element.addEventListener('mousemove',drag)
