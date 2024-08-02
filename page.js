@@ -12,17 +12,17 @@ let isMouseDown = [];
 let isDelete = [];
 let actualheight = window.innerHeight
 let height = window.innerHeight - (window.innerHeight*0.15);
-function getCursorCoordinates(event) {
-    return {
-      x: event.clientX,
-      y: event.clientY
-    };
-  }
+// function getCursorCoordinates(event) {
+//     return {
+//       x: event.clientX,
+//       y: event.clientY
+//     };
+//   }
 
-  document.addEventListener('mousemove', (e) => {
-    var xy = getCursorCoordinates(e);
-    document.getElementById('check').innerHTML = xy.x + "," + xy.y;
-});
+//   document.addEventListener('mousemove', (e) => {
+//     var xy = getCursorCoordinates(e);
+    // document.getElementById('check').innerHTML = xy.x + "," + xy.y;
+// });
 function createElement(){
     const div = document.createElement("textarea");
     div.placeholder = "Type here..."
@@ -84,7 +84,7 @@ function dragNdDrop(element, id, co){
         offY = element.offsetTop - Y;
         element.className = "dragable1";
         console.log(offX);
-        document.getElementById('guide').innerHTML = isDelete[co];
+        // document.getElementById('guide').innerHTML = isDelete[co];
     });
     
     element.addEventListener( events[isTouch()].drag, (e) => {
@@ -101,15 +101,15 @@ function dragNdDrop(element, id, co){
         element.style.left = mouX +'px';
         element.style.top = mouY +'px';
         element.className = "dragable1";
-        document.getElementById('deleteMessage').innerHTML = "Drag down to delete";
+        document.getElementById('guide').innerHTML = "Drag down to delete";
         if(Y>height){
-            document.getElementById('guide').innerHTML = isDelete[co] + "," +Y+",,"+height+"and"+actualheight;
+            // document.getElementById('guide').innerHTML = isDelete[co] + "," +Y+",,"+height+"and"+actualheight;
             document.getElementById('delete').className = "delete1";
             isDelete[co] = true;
             element.className = "shake";
             // document.getElementById('divo1').innerHTML = isDelete;
         }else{
-            document.getElementById('guide').innerHTML = isDelete[co] + "," +Y+",,"+height+"and"+actualheight;
+            // document.getElementById('guide').innerHTML = isDelete[co] + "," +Y+",,"+height+"and"+actualheight;
             // element.style.backgroundColor = "rgba(255, 255, 255, 0)";
             document.getElementById('delete').className = "delete2";
             isDelete[co] = false;
@@ -119,10 +119,10 @@ function dragNdDrop(element, id, co){
     });
     
     element.addEventListener(events[isTouch()].end, (e) => {
-        document.getElementById('guide').innerHTML = isDelete[co];
+        // document.getElementById('guide').innerHTML = isDelete[co];
         isMouseDown[co] = false;
         element.className = "dragable";
-        document.getElementById('deleteMessage').innerHTML = "";
+        document.getElementById('guide').innerHTML = "";
         if (isDelete[co]) {
             element.remove();
             current =  -1;
